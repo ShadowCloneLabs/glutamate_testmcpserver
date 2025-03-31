@@ -1,16 +1,14 @@
-import { TestMcpServer } from "./server.js";
+import { SequentialThinkingHttpServer } from './server2.js';
 
-const PORT = 3332;
-
-async function startServer(): Promise<void> {
-  const server = new TestMcpServer();
-  
-  console.log(`Initializing Test MCP Server in HTTP mode on port ${PORT}...`);
-  await server.startHttpServer(PORT);
+async function main() {
+  try {
+    const server = new SequentialThinkingHttpServer();
+    // Start the HTTP server on port 3000
+    await server.startHttpServer(3002);
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
 }
 
-// Start the server
-startServer().catch((error) => {
-  console.error("Failed to start server:", error);
-  process.exit(1);
-}); 
+main(); 
